@@ -9,7 +9,7 @@ Public Class Anasayfa
             Gelen_Session_Text.Text = Marshal.PtrToStringAnsi(Login(Parametre_Text.Text, Pin_Text.Text))
             Giden_Session_Text.Text = Gelen_Session_Text.Text
             Veri_Yazma_SessionID_Text.Text = Gelen_Session_Text.Text
-
+            GC.Collect()
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
@@ -18,17 +18,19 @@ Public Class Anasayfa
     Private Sub Data_Oku_Buton_Click(sender As Object, e As EventArgs) Handles Data_Oku_Buton.Click
 
         Okunan_Eeprom_Data_Text.Text = Marshal.PtrToStringAnsi(Read_Protected_Data(Giden_Session_Text.Text, CInt(Data_Oku_Adres_Text.Text), Data_Oku_Pin_Text.Text, Data_Oku_Key_Text.Text))
-
+        GC.Collect()
     End Sub
 
 
 
     Private Sub Cihaz_Model_Oku_Buton_Click(sender As Object, e As EventArgs) Handles Cihaz_Model_Oku_Buton.Click
         Cihaz_Model_Text.Text = Marshal.PtrToStringAnsi(Device_Model_Read())
+        GC.Collect()
     End Sub
 
     Private Sub Serial_Oku_Buton_Click(sender As Object, e As EventArgs) Handles Serial_Oku_Buton.Click
         Cihaz_SeriNo_Text.Text = Marshal.PtrToStringAnsi(Serial_No_Read())
+        GC.Collect()
     End Sub
 
     Private Sub Pin_Yukle_Buton_Click(sender As Object, e As EventArgs) Handles Pin_Yukle_Buton.Click
